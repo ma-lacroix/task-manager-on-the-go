@@ -25,6 +25,7 @@ func (t *TaskData) GetTaskMap() bool {
 	for k, v := range t.taskMap {
 		fmt.Println(k, v)
 	}
+	fmt.Println()
 	return true
 }
 

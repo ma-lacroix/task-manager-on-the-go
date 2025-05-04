@@ -37,12 +37,8 @@ func NewUserInput(s string, e []string) *UserInput {
 	return &UserInput{selection, e}
 }
 
-func (u *UserInput) validateInput(inputString []string) bool {
-	return true
-}
-
 func (u *UserInput) ViewAllTasks(taskData *data.TaskData) bool {
-	fmt.Println("All tasks here")
+	fmt.Println("All tasks here \n")
 	return taskData.GetTaskMap()
 }
 
@@ -51,12 +47,12 @@ func (u *UserInput) AddNewTask(taskData *data.TaskData) bool {
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println("New task here ", task.Type, task.DueDate)
+	fmt.Println("New task added \n", task.Type, task.DueDate)
 	return taskData.AddTask(*task)
 }
 
 func (u *UserInput) DeleteEntryTask(taskData *data.TaskData) bool {
-	fmt.Println("Deleting entry ", u.extraOptions[0])
+	fmt.Println("Deleting entry \n", u.extraOptions[0])
 	return taskData.RemoveTask(u.extraOptions[0])
 }
 
@@ -70,7 +66,7 @@ func (u *UserInput) HandleInput(taskData *data.TaskData) bool {
 	case DELETE_ENTRY:
 		status = u.DeleteEntryTask(taskData)
 	default:
-		fmt.Println("Invalid operation, something went wrong")
+		fmt.Println("Invalid operation, something went wrong \n")
 		status = false
 	}
 	return status

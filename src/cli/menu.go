@@ -22,13 +22,13 @@ func (*Menu) ShowOption(selection string) bool {
 	status := true
 	switch selection {
 	case "1":
-		fmt.Println("here are all the tasks you've created: ")
+		fmt.Println("here are all the tasks you've created: \n")
 	case "2":
-		fmt.Println("Add a new task by the type and execution date: ")
+		fmt.Println("Add a new task by the type and execution date: \n")
 	case "3":
-		fmt.Println("Enter the ID of the task you want to delete: ")
+		fmt.Println("Enter the ID of the task you want to delete: \n")
 	default:
-		fmt.Println("invalid option!")
+		fmt.Println("invalid option! \n")
 		status = false
 	}
 	fmt.Print("> ")
