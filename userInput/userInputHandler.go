@@ -2,6 +2,7 @@ package userInput
 
 import (
 	"fmt"
+	"taskManager/data"
 	"taskManager/tasks"
 )
 
@@ -40,37 +41,34 @@ func (u *UserInput) validateInput(inputString []string) bool {
 	return true
 }
 
-func (u *UserInput) ViewAllTasks() bool {
-	// TODO: show all tasks from DB here
+func (u *UserInput) ViewAllTasks(taskData *data.TaskData) bool {
 	fmt.Println("All tasks here")
-	return true
+	return taskData.GetTaskMap()
 }
 
-func (u *UserInput) AddNewTask() bool {
+func (u *UserInput) AddNewTask(taskData *data.TaskData) bool {
 	task, err := tasks.NewTask(u.extraOptions[0], u.extraOptions[1])
 	if err != nil {
 		fmt.Println(err)
 	}
-	// TODO: write new task in DB
 	fmt.Println("New task here ", task.Type, task.DueDate)
-	return true
+	return taskData.AddTask(*task)
 }
 
-func (u *UserInput) DeleteEntryTask() bool {
-	// TODO: remove data from DB
+func (u *UserInput) DeleteEntryTask(taskData *data.TaskData) bool {
 	fmt.Println("Deleting entry ", u.extraOptions[0])
-	return true
+	return taskData.RemoveTask(u.extraOptions[0])
 }
 
-func (u *UserInput) HandleInput() bool {
+func (u *UserInput) HandleInput(taskData *data.TaskData) bool {
 	status := true
 	switch u.selection {
 	case VIEW_ALL:
-		status = u.ViewAllTasks()
+		status = u.ViewAllTasks(taskData)
 	case ADD_NEW:
-		status = u.AddNewTask()
+		status = u.AddNewTask(taskData)
 	case DELETE_ENTRY:
-		status = u.DeleteEntryTask()
+		status = u.DeleteEntryTask(taskData)
 	default:
 		fmt.Println("Invalid operation, something went wrong")
 		status = false

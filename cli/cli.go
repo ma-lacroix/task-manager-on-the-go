@@ -5,14 +5,16 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"taskManager/data"
 	"taskManager/userInput"
 )
 
 type REPL struct {
+	taskManager data.TaskData
 }
 
 func NewReply() REPL {
-	return REPL{}
+	return REPL{*data.NewTaskData()}
 }
 
 func (r *REPL) Run() {
@@ -40,7 +42,7 @@ func (r *REPL) Run() {
 			}
 		}
 		userInputHandler := userInput.NewUserInput(input, strings.Split(extraOptions, " "))
-		if !userInputHandler.HandleInput() {
+		if !userInputHandler.HandleInput(&r.taskManager) {
 			break
 		}
 	}
